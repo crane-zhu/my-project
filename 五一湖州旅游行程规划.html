@@ -1,0 +1,945 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>五一湖州旅游行程规划</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Helvetica Neue', Arial, sans-serif;
+        }
+        body {
+            background-color: #f5f7fa;
+            color: #2d3748;
+            line-height: 1.6;
+            padding: 0;
+            margin: 0;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        header {
+            background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('https://store.is.autonavi.com/showpic/3e5222b52f0a160206d32547d5dc1f35');
+            background-size: cover;
+            background-position: center;
+            height: 300px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            color: #fff;
+            padding: 20px;
+            margin-bottom: 30px;
+            border-radius: 10px;
+        }
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+        .trip-info {
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+        }
+        .weather-summary {
+            background-color: rgba(255, 255, 255, 0.2);
+            padding: 10px 20px;
+            border-radius: 20px;
+            margin-top: 10px;
+            display: inline-block;
+            backdrop-filter: blur(5px);
+        }
+        .section {
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            padding: 25px;
+            margin-bottom: 30px;
+        }
+        .section-title {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #edf2f7;
+            color: #3182ce;
+            font-size: 1.5rem;
+        }
+        .section-title i {
+            margin-right: 10px;
+            font-size: 1.8rem;
+        }
+        .overview-card {
+            border-left: 4px solid #3182ce;
+            background-color: #ebf8ff;
+            padding: 15px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+        }
+        .overview-card h3 {
+            margin-bottom: 10px;
+            color: #2c5282;
+            display: flex;
+            align-items: center;
+        }
+        .overview-card h3 i {
+            margin-right: 10px;
+        }
+        .overview-card p {
+            margin-bottom: 8px;
+        }
+        .day-schedule {
+            margin-bottom: 30px;
+        }
+        .day-title {
+            background-color: #4299e1;
+            color: white;
+            padding: 10px 15px;
+            border-radius: 5px;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .day-title h3 {
+            font-size: 1.3rem;
+            display: flex;
+            align-items: center;
+        }
+        .day-title h3 i {
+            margin-right: 10px;
+        }
+        .day-title .weather {
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+        }
+        .day-title .weather i {
+            margin-right: 5px;
+        }
+        .timeline {
+            position: relative;
+            margin-left: 20px;
+            padding-left: 30px;
+        }
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            height: 100%;
+            width: 2px;
+            background-color: #cbd5e0;
+        }
+        .timeline-item {
+            position: relative;
+            margin-bottom: 25px;
+        }
+        .timeline-item:last-child {
+            margin-bottom: 0;
+        }
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -36px;
+            top: 0;
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            background-color: #4299e1;
+            border: 3px solid #ebf8ff;
+            z-index: 1;
+        }
+        .timeline-time {
+            font-weight: bold;
+            color: #3182ce;
+            margin-bottom: 5px;
+        }
+        .timeline-content {
+            background-color: #f8fafc;
+            padding: 15px;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+        }
+        .timeline-content h4 {
+            color: #2d3748;
+            margin-bottom: 5px;
+            display: flex;
+            align-items: center;
+        }
+        .timeline-content h4 i {
+            margin-right: 8px;
+            color: #3182ce;
+        }
+        .timeline-content p {
+            color: #4a5568;
+            margin-bottom: 5px;
+        }
+        .timeline-content .duration, .timeline-content .price {
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            color: #718096;
+        }
+        .timeline-content .duration i, .timeline-content .price i {
+            margin-right: 5px;
+        }
+        .transportation {
+            margin-top: 15px;
+            background-color: #e6fffa;
+            border-left: 4px solid #38b2ac;
+            padding: 10px;
+            border-radius: 5px;
+            font-size: 0.9rem;
+        }
+        .transportation h4 {
+            color: #2c7a7b;
+            display: flex;
+            align-items: center;
+            margin-bottom: 8px;
+        }
+        .transportation h4 i {
+            margin-right: 8px;
+        }
+        .transportation p {
+            margin-bottom: 5px;
+            display: flex;
+            align-items: center;
+            color: #4a5568;
+        }
+        .transportation i {
+            margin-right: 5px;
+            color: #38b2ac;
+        }
+        .accommodations {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+        }
+        .hotel-card {
+            background-color: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+        .hotel-card:hover {
+            transform: translateY(-5px);
+        }
+        .hotel-card img {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+        }
+        .hotel-info {
+            padding: 15px;
+        }
+        .hotel-info h4 {
+            color: #2d3748;
+            margin-bottom: 8px;
+            font-size: 1.1rem;
+        }
+        .hotel-info p {
+            margin-bottom: 8px;
+            font-size: 0.9rem;
+            color: #4a5568;
+            display: flex;
+            align-items: flex-start;
+        }
+        .hotel-info p i {
+            margin-right: 8px;
+            margin-top: 4px;
+            color: #3182ce;
+        }
+        .restaurants {
+            margin-top: 30px;
+        }
+        .restaurant-item {
+            margin-bottom: 20px;
+            padding-bottom: 20px;
+            border-bottom: 1px dashed #e2e8f0;
+        }
+        .restaurant-item:last-child {
+            border-bottom: none;
+            padding-bottom: 0;
+            margin-bottom: 0;
+        }
+        .restaurant-item h4 {
+            color: #2d3748;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+        }
+        .restaurant-item h4 i {
+            margin-right: 8px;
+            color: #ed8936;
+        }
+        .restaurant-item p {
+            margin-bottom: 5px;
+            font-size: 0.95rem;
+            color: #4a5568;
+            display: flex;
+            align-items: flex-start;
+        }
+        .restaurant-item p i {
+            margin-right: 8px;
+            margin-top: 4px;
+            color: #3182ce;
+        }
+        .dish-list {
+            margin-top: 8px;
+            padding-left: 25px;
+        }
+        .dish-list li {
+            margin-bottom: 5px;
+            font-size: 0.9rem;
+            color: #4a5568;
+        }
+        .practical-info {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+        }
+        .info-card {
+            background-color: white;
+            border-radius: 8px;
+            padding: 15px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+            border-left: 4px solid #4299e1;
+        }
+        .info-card h4 {
+            color: #2d3748;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+        }
+        .info-card h4 i {
+            margin-right: 8px;
+            color: #3182ce;
+        }
+        .info-card p, .info-card li {
+            font-size: 0.9rem;
+            color: #4a5568;
+            margin-bottom: 5px;
+        }
+        .info-card ul {
+            padding-left: 20px;
+            margin-bottom: 0;
+        }
+        .price-tag {
+            display: inline-block;
+            background-color: #ebf8ff;
+            color: #3182ce;
+            padding: 2px 8px;
+            border-radius: 12px;
+            font-size: 0.85rem;
+            margin-left: 5px;
+        }
+        .tag {
+            display: inline-block;
+            background-color: #e6fffa;
+            color: #38b2ac;
+            padding: 2px 8px;
+            border-radius: 12px;
+            font-size: 0.85rem;
+            margin-right: 5px;
+            margin-bottom: 5px;
+        }
+        .notice {
+            background-color: #fef5f5;
+            border-left: 4px solid #e53e3e;
+            padding: 10px 15px;
+            border-radius: 5px;
+            margin-top: 15px;
+        }
+        .notice h4 {
+            color: #c53030;
+            margin-bottom: 5px;
+            display: flex;
+            align-items: center;
+        }
+        .notice h4 i {
+            margin-right: 8px;
+        }
+        footer {
+            text-align: center;
+            padding: 20px;
+            color: #718096;
+            font-size: 0.9rem;
+        }
+        @media (max-width: 768px) {
+            header {
+                height: 200px;
+            }
+            h1 {
+                font-size: 1.8rem;
+            }
+            .trip-info {
+                font-size: 1rem;
+            }
+            .section-title {
+                font-size: 1.3rem;
+            }
+            .accommodation, .practical-info {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>湖州五一休闲之旅</h1>
+        <p class="trip-info">2025年4月30日 - 5月3日 | 家庭出游</p>
+        <div class="weather-summary">
+            <i class="fas fa-cloud-sun"></i> 五一期间天气：多云到晴，气温11-27°C
+        </div>
+    </header>
+
+    <div class="container">
+        <div class="section">
+            <h2 class="section-title"><i class="fas fa-map-marked-alt"></i> 行程概览</h2>
+            <div class="overview-card">
+                <h3><i class="fas fa-calendar-check"></i> 行程亮点</h3>
+                <p><strong>主题：</strong> 轻松休闲的自然与水乡风情体验</p>
+                <p><strong>景点：</strong> 莫干山、安吉竹海、南浔古镇</p>
+                <p><strong>特色：</strong> 山水自然风光、江南水乡文化、竹海氧吧</p>
+                <p><strong>适合人群：</strong> 包含老人、儿童的家庭游</p>
+            </div>
+            <div class="overview-card">
+                <h3><i class="fas fa-route"></i> 行程路线</h3>
+                <p><strong>Day 1 (4月30日)：</strong> <i class="fas fa-mountain"></i> 抵达莫干山 - 轻松游览景区 - 入住度假酒店</p>
+                <p><strong>Day 2 (5月1日)：</strong> <i class="fas fa-tree"></i> 莫干山深度游 - 下午前往安吉竹海</p>
+                <p><strong>Day 3 (5月2日)：</strong> <i class="fas fa-tree"></i> 安吉竹海一日游 - 中国大竹海景区</p>
+                <p><strong>Day 4 (5月3日)：</strong> <i class="fas fa-landmark"></i> 南浔古镇一日游 - 结束行程</p>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2 class="section-title"><i class="fas fa-calendar-alt"></i> 详细行程</h2>
+
+            <!-- Day 1 -->
+            <div class="day-schedule">
+                <div class="day-title">
+                    <h3><i class="fas fa-sun"></i> Day 1 (4月30日 星期三)</h3>
+                    <div class="weather"><i class="fas fa-cloud"></i> 多云 11-25°C</div>
+                </div>
+                <div class="timeline">
+                    <div class="timeline-item">
+                        <div class="timeline-time">09:30 - 12:00</div>
+                        <div class="timeline-content">
+                            <h4><i class="fas fa-car"></i> 自驾前往莫干山</h4>
+                            <p>从出发地自驾前往莫干山风景区，根据出发地不同，行驶时间有所差异</p>
+                            <p class="duration"><i class="far fa-clock"></i> 预计行驶时间：2-3小时</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-time">12:00 - 13:30</div>
+                        <div class="timeline-content">
+                            <h4><i class="fas fa-utensils"></i> 午餐</h4>
+                            <p>抵达莫干山后，在莫干山镇享用当地特色午餐</p>
+                            <div class="restaurant-item" style="border:none; padding:0; margin:5px 0;">
+                                <h4 style="font-size:1rem;"><i class="fas fa-store"></i> 推荐餐厅：莫干山农家菜</h4>
+                                <p><i class="fas fa-certificate"></i> 特色菜：莫干山笋、山野菌类、农家小炒肉</p>
+                                <p><i class="fas fa-money-bill-wave"></i> 人均消费：100-150元</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-time">13:30 - 14:30</div>
+                        <div class="timeline-content">
+                            <h4><i class="fas fa-hotel"></i> 办理入住</h4>
+                            <p>前往预定的莫干山度假酒店办理入住手续，放置行李，短暂休息</p>
+                            <p class="duration"><i class="far fa-clock"></i> 入住时间：14:00后</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-time">14:30 - 17:30</div>
+                        <div class="timeline-content">
+                            <h4><i class="fas fa-mountain"></i> 莫干山风景区初体验</h4>
+                            <p>轻松游览莫干山景区，欣赏山林风光，呼吸新鲜空气</p>
+                            <p>推荐路线：景区大门 → 武陵村 → 剑池 → 芦花荡</p>
+                            <div class="duration"><i class="far fa-clock"></i> 游览时间：约3小时</div>
+                            <div class="price"><i class="fas fa-ticket-alt"></i> 门票：80元/人（老人、儿童有优惠票价）</div>
+                            <div class="notice">
+                                <h4><i class="fas fa-exclamation-circle"></i> 温馨提示</h4>
+                                <p>莫干山景区内坡度较大，带老人和儿童游览时注意控制游览速度和范围，避免过度疲劳</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-time">18:00 - 19:30</div>
+                        <div class="timeline-content">
+                            <h4><i class="fas fa-utensils"></i> 晚餐</h4>
+                            <p>在酒店或附近餐厅享用晚餐，品尝当地特色料理</p>
+                            <div class="restaurant-item" style="border:none; padding:0; margin:5px 0;">
+                                <h4 style="font-size:1rem;"><i class="fas fa-store"></i> 推荐餐厅：酒店内餐厅</h4>
+                                <p><i class="fas fa-certificate"></i> 特色菜：竹笋、山野蔬菜、土鸡</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-time">19:30 - 21:30</div>
+                        <div class="timeline-content">
+                            <h4><i class="fas fa-moon"></i> 休闲时光</h4>
+                            <p>在酒店内休息，享受山间夜晚的宁静氛围，为第二天的行程养精蓄锐</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Day 2 -->
+            <div class="day-schedule">
+                <div class="day-title">
+                    <h3><i class="fas fa-sun"></i> Day 2 (5月1日 星期四)</h3>
+                    <div class="weather"><i class="fas fa-cloud"></i> 多云转晴 13-23°C</div>
+                </div>
+                <div class="timeline">
+                    <div class="timeline-item">
+                        <div class="timeline-time">07:30 - 08:30</div>
+                        <div class="timeline-content">
+                            <h4><i class="fas fa-utensils"></i> 早餐</h4>
+                            <p>在酒店享用早餐</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-time">08:30 - 11:30</div>
+                        <div class="timeline-content">
+                            <h4><i class="fas fa-hiking"></i> 莫干山深度游</h4>
+                            <p>在莫干山景区进行深度游览，体验更多景点</p>
+                            <p>推荐路线：莫干松云、白云源、望湖亭、庐峰</p>
+                            <div class="duration"><i class="far fa-clock"></i> 游览时间：约3小时</div>
+                            <div class="notice">
+                                <h4><i class="fas fa-exclamation-circle"></i> 温馨提示</h4>
+                                <p>带好防晒、防蚊用品，穿着舒适的鞋子，携带足够的饮用水</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-time">11:30 - 12:30</div>
+                        <div class="timeline-content">
+                            <h4><i class="fas fa-utensils"></i> 午餐</h4>
+                            <p>在莫干山景区附近享用午餐，补充体力</p>
+                            <div class="restaurant-item" style="border:none; padding:0; margin:5px 0;">
+                                <h4 style="font-size:1rem;"><i class="fas fa-store"></i> 推荐餐厅：莫干山明月餐厅</h4>
+                                <p><i class="fas fa-certificate"></i> 特色菜：山菌汤、莫干山小炒肉</p>
+                                <p><i class="fas fa-money-bill-wave"></i> 人均消费：80-120元</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-time">12:30 - 13:00</div>
+                        <div class="timeline-content">
+                            <h4><i class="fas fa-hotel"></i> 退房</h4>
+                            <p>办理退房手续，整理行李</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-time">13:00 - 15:00</div>
+                        <div class="timeline-content">
+                            <h4><i class="fas fa-car"></i> 前往安吉竹海</h4>
+                            <p>从莫干山自驾前往安吉中国大竹海景区</p>
+                            <div class="duration"><i class="far fa-clock"></i> 行驶时间：约75分钟，距离48公里</div>
+                            <div class="transportation">
+                                <h4><i class="fas fa-directions"></i> 行车路线</h4>
+                                <p><i class="fas fa-road"></i> 莫干山景区 → 德清县道 → 开发区大道 → S302 → 天荒坪镇 → 中国大竹海景区</p>
+                                <p><i class="fas fa-gas-pump"></i> 沿途有多个加油站，可根据需要加油</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-time">15:00 - 16:00</div>
+                        <div class="timeline-content">
+                            <h4><i class="fas fa-hotel"></i> 安吉竹海地区入住</h4>
+                            <p>抵达安吉竹海区域，办理入住手续，休息调整</p>
+                            <p class="duration"><i class="far fa-clock"></i> 入住时间：15:00后</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-time">16:00 - 18:00</div>
+                        <div class="timeline-content">
+                            <h4><i class="fas fa-tree"></i> 安吉竹海初体验</h4>
+                            <p>在酒店周边轻松游览，感受竹海风光</p>
+                            <p>可选择在酒店附近散步，欣赏竹林、溪流等自然风景</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-time">18:00 - 19:30</div>
+                        <div class="timeline-content">
+                            <h4><i class="fas fa-utensils"></i> 晚餐</h4>
+                            <p>在酒店或附近餐厅享用晚餐</p>
+                            <div class="restaurant-item" style="border:none; padding:0; margin:5px 0;">
+                                <h4 style="font-size:1rem;"><i class="fas fa-store"></i> 推荐餐厅：竹海人家餐厅</h4>
+                                <p><i class="fas fa-certificate"></i> 特色菜：竹笋、山野菜、土鸡煲</p>
+                                <p><i class="fas fa-money-bill-wave"></i> 人均消费：100-150元</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-time">19:30 - 21:30</div>
+                        <div class="timeline-content">
+                            <h4><i class="fas fa-moon"></i> 休闲活动</h4>
+                            <p>在酒店休息，可享受酒店提供的娱乐设施或泡泡温泉（如有）</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Day 3 -->
+            <div class="day-schedule">
+                <div class="day-title">
+                    <h3><i class="fas fa-sun"></i> Day 3 (5月2日 星期五)</h3>
+                    <div class="weather"><i class="fas fa-cloud-sun"></i> 多云转晴 11-26°C</div>
+                </div>
+                <div class="timeline">
+                    <div class="timeline-item">
+                        <div class="timeline-time">07:30 - 08:30</div>
+                        <div class="timeline-content">
+                            <h4><i class="fas fa-utensils"></i> 早餐</h4>
+                            <p>在酒店享用早餐</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-time">08:30 - 12:00</div>
+                        <div class="timeline-content">
+                            <h4><i class="fas fa-tree"></i> 中国大竹海景区游览</h4>
+                            <p>前往中国大竹海景区游览，感受竹海的壮观与清新</p>
+                            <p>推荐路线：游客中心 → 竹海探幽 → 竹海通幽 → 竹海观景台 → 三十三观音</p>
+                            <div class="duration"><i class="far fa-clock"></i> 游览时间：约3.5小时</div>
+                            <div class="price"><i class="fas fa-ticket-alt"></i> 门票：95元/人（老人、儿童有优惠票价）</div>
+                            <div class="notice">
+                                <h4><i class="fas fa-exclamation-circle"></i> 温馨提示</h4>
+                                <p>景区内有山路，带老人和儿童可以选择乘坐景区观光车，观光车票另付</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-time">12:00 - 13:30</div>
+                        <div class="timeline-content">
+                            <h4><i class="fas fa-utensils"></i> 午餐</h4>
+                            <p>在景区内或附近餐厅享用午餐</p>
+                            <div class="restaurant-item" style="border:none; padding:0; margin:5px 0;">
+                                <h4 style="font-size:1rem;"><i class="fas fa-store"></i> 推荐餐厅：竹海第一庄</h4>
+                                <p><i class="fas fa-certificate"></i> 特色菜：竹筒饭、竹荪汤、农家小炒</p>
+                                <p><i class="fas fa-money-bill-wave"></i> 人均消费：80-120元</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-time">13:30 - 16:30</div>
+                        <div class="timeline-content">
+                            <h4><i class="fas fa-leaf"></i> 竹文化体验</h4>
+                            <p>参加竹编工艺体验、品尝竹笋、了解竹文化</p>
+                            <p>可选活动：竹编手工制作、竹筒烧饭体验、观看竹艺表演</p>
+                            <div class="duration"><i class="far fa-clock"></i> 活动时间：约3小时</div>
+                            <div class="price"><i class="fas fa-ticket-alt"></i> 体验费用：30-50元/人</div>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-time">16:30 - 18:00</div>
+                        <div class="timeline-content">
+                            <h4><i class="fas fa-shopping-bag"></i> 特产购买</h4>
+                            <p>在景区购买安吉白茶、竹制品等特产</p>
+                            <p>推荐特产：安吉白茶、竹炭制品、竹编工艺品</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-time">18:00 - 19:30</div>
+                        <div class="timeline-content">
+                            <h4><i class="fas fa-utensils"></i> 晚餐</h4>
+                            <p>在酒店或附近餐厅享用晚餐</p>
+                            <div class="restaurant-item" style="border:none; padding:0; margin:5px 0;">
+                                <h4 style="font-size:1rem;"><i class="fas fa-store"></i> 推荐餐厅：酒店内餐厅</h4>
+                                <p><i class="fas fa-certificate"></i> 特色菜：当地时令菜肴</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-time">19:30 - 21:30</div>
+                        <div class="timeline-content">
+                            <h4><i class="fas fa-moon"></i> 休闲时光</h4>
+                            <p>收拾行李，为明天的行程做准备</p>
+                            <p>可以在酒店设施放松身心</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Day 4 -->
+            <div class="day-schedule">
+                <div class="day-title">
+                    <h3><i class="fas fa-sun"></i> Day 4 (5月3日 星期六)</h3>
+                    <div class="weather"><i class="fas fa-cloud"></i> 多云 12-26°C</div>
+                </div>
+                <div class="timeline">
+                    <div class="timeline-item">
+                        <div class="timeline-time">07:00 - 08:00</div>
+                        <div class="timeline-content">
+                            <h4><i class="fas fa-utensils"></i> 早餐</h4>
+                            <p>在酒店享用早餐</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-time">08:00 - 08:30</div>
+                        <div class="timeline-content">
+                            <h4><i class="fas fa-hotel"></i> 退房</h4>
+                            <p>办理退房手续</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-time">08:30 - 10:30</div>
+                        <div class="timeline-content">
+                            <h4><i class="fas fa-car"></i> 前往南浔古镇</h4>
+                            <p>从安吉竹海自驾前往南浔古镇</p>
+                            <div class="duration"><i class="far fa-clock"></i> 行驶时间：约102分钟，距离120.7公里</div>
+                            <div class="transportation">
+                                <h4><i class="fas fa-directions"></i> 行车路线</h4>
+                                <p><i class="fas fa-road"></i> 中国大竹海 → S305 → S304 → G25 → 南浔古镇</p>
+                                <p><i class="fas fa-gas-pump"></i> 建议在高速公路服务区休息补给</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-time">10:30 - 11:00</div>
+                        <div class="timeline-content">
+                            <h4><i class="fas fa-parking"></i> 停车与入口</h4>
+                            <p>停车在南浔古镇停车场，购买门票</p>
+                            <div class="price"><i class="fas fa-ticket-alt"></i> 门票：100元/人（老人、儿童有优惠票价）</div>
+                            <div class="notice">
+                                <h4><i class="fas fa-exclamation-circle"></i> 温馨提示</h4>
+                                <p>景区有东门和南门两个入口，南门停车场较大</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-time">11:00 - 12:30</div>
+                        <div class="timeline-content">
+                            <h4><i class="fas fa-landmark"></i> 南浔古镇游览（上午）</h4>
+                            <p>开始南浔古镇半日游</p>
+                            <p>推荐路线：小莲庄 → 张静江故居 → 百间楼</p>
+                            <div class="duration"><i class="far fa-clock"></i> 游览时间：约1.5小时</div>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-time">12:30 - 13:30</div>
+                        <div class="timeline-content">
+                            <h4><i class="fas fa-utensils"></i> 午餐</h4>
+                            <p>在古镇内享用地道的江南美食</p>
+                            <div class="restaurant-item" style="border:none; padding:0; margin:5px 0;">
+                                <h4 style="font-size:1rem;"><i class="fas fa-store"></i> 推荐餐厅：南浔人家</h4>
+                                <p><i class="fas fa-certificate"></i> 特色菜：南浔臭豆腐、太湖银鱼、三白酒酿蛋</p>
+                                <p><i class="fas fa-money-bill-wave"></i> 人均消费：80-130元</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-time">13:30 - 16:00</div>
+                        <div class="timeline-content">
+                            <h4><i class="fas fa-landmark"></i> 南浔古镇游览（下午）</h4>
+                            <p>继续游览南浔古镇</p>
+                            <p>推荐路线：嘉业堂 → 广惠宫 → 南浔桥 → 刘氏梯号 → 文园</p>
+                            <div class="duration"><i class="far fa-clock"></i> 游览时间：约2.5小时</div>
+                            <div class="notice">
+                                <h4><i class="fas fa-exclamation-circle"></i> 温馨提示</h4>
+                                <p>可以租船游览水上南浔，体验不同视角的古镇风貌</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-time">16:00 - 17:00</div>
+                        <div class="timeline-content">
+                            <h4><i class="fas fa-shopping-bag"></i> 特产购买与休息</h4>
+                            <p>在古镇内购买纪念品，品尝小吃</p>
+                            <p>推荐特产：南浔丝绸、南浔糕点、水乡手工艺品</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-time">17:00 - 19:00</div>
+                        <div class="timeline-content">
+                            <h4><i class="fas fa-car"></i> 结束行程</h4>
+                            <p>离开南浔古镇，结束湖州之旅</p>
+                            <p>根据需要返程或继续前往其他目的地</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2 class="section-title"><i class="fas fa-hotel"></i> 住宿推荐</h2>
+            <div class="accommodations">
+                <!-- 莫干山住宿 -->
+                <div class="hotel-card">
+                    <img src="https://store.is.autonavi.com/showpic/7cd46da5971e42a4e3aeb7f9ca6094b6" alt="莫干山缦田生态度假酒店">
+                    <div class="hotel-info">
+                        <h4>莫干山缦田生态度假酒店 <span class="price-tag">600-800元/晚</span></h4>
+                        <p><i class="fas fa-map-marker-alt"></i> 地址：莫干山镇筏头村渔村88号</p>
+                        <p><i class="fas fa-info-circle"></i> 特点：独栋别墅设计，环境优美，适合家庭入住</p>
+                        <p><i class="fas fa-check-circle"></i> 设施：免费WiFi、停车场、餐厅、空调</p>
+                        <div class="tag">安静环境</div>
+                        <div class="tag">干净整洁</div>
+                        <div class="tag">亲子友好</div>
+                    </div>
+                </div>
+                
+                <div class="hotel-card">
+                    <img src="https://store.is.autonavi.com/showpic/7893e82e1db557eb1f834693c6b629fe" alt="宿里·莫干山花园温泉度假酒店">
+                    <div class="hotel-info">
+                        <h4>宿里·莫干山花园温泉度假酒店 <span class="price-tag">700-900元/晚</span></h4>
+                        <p><i class="fas fa-map-marker-alt"></i> 地址：莫干山镇上皋坞村</p>
+                        <p><i class="fas fa-info-circle"></i> 特点：有温泉设施，环境优美，服务好</p>
+                        <p><i class="fas fa-check-circle"></i> 设施：温泉、餐厅、停车场、接送服务</p>
+                        <div class="tag">温泉</div>
+                        <div class="tag">花园景观</div>
+                        <div class="tag">优质服务</div>
+                    </div>
+                </div>
+
+                <!-- 安吉竹海住宿 -->
+                <div class="hotel-card">
+                    <img src="http://store.is.autonavi.com/showpic/1ad23c87c964801b676c110f1f306287" alt="安吉大竹海度假村">
+                    <div class="hotel-info">
+                        <h4>安吉大竹海度假村 <span class="price-tag">500-700元/晚</span></h4>
+                        <p><i class="fas fa-map-marker-alt"></i> 地址：天荒坪镇港口(近山石线)</p>
+                        <p><i class="fas fa-info-circle"></i> 特点：位置靠近中国大竹海景区，环境优美</p>
+                        <p><i class="fas fa-check-circle"></i> 设施：免费WiFi、停车场、餐厅、会议室</p>
+                        <div class="tag">靠近景区</div>
+                        <div class="tag">竹林环绕</div>
+                        <div class="tag">适合家庭</div>
+                    </div>
+                </div>
+                
+                <div class="hotel-card">
+                    <img src="http://store.is.autonavi.com/showpic/761d47995d48b073997774addeaa4f54" alt="安吉仙海山庄">
+                    <div class="hotel-info">
+                        <h4>安吉仙海山庄 <span class="price-tag">600-800元/晚</span></h4>
+                        <p><i class="fas fa-map-marker-alt"></i> 地址：天荒坪镇五鹤村(中国大竹海景区)</p>
+                        <p><i class="fas fa-info-circle"></i> 特点：位于景区内，环境静谧，空气清新</p>
+                        <p><i class="fas fa-check-circle"></i> 设施：餐厅、停车场、接送服务、商务中心</p>
+                        <div class="tag">景区内</div>
+                        <div class="tag">安静</div>
+                        <div class="tag">空气好</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="restaurants">
+                <h3 style="margin: 30px 0 20px; color: #3182ce;"><i class="fas fa-utensils"></i> 特色餐厅推荐</h3>
+                
+                <!-- 莫干山餐厅 -->
+                <div class="restaurant-item">
+                    <h4><i class="fas fa-store"></i> 莫干山农家菜馆</h4>
+                    <p><i class="fas fa-map-marker-alt"></i> 地址：莫干山风景区附近</p>
+                    <p><i class="fas fa-info-circle"></i> 特色：正宗的莫干山农家菜，采用当地新鲜食材</p>
+                    <p><i class="fas fa-money-bill-wave"></i> 人均消费：100-150元</p>
+                    <p><i class="fas fa-certificate"></i> 推荐菜品：</p>
+                    <ul class="dish-list">
+                        <li>莫干山笋：鲜嫩多汁，是当地特产</li>
+                        <li>山野菌煲：采用当地野生菌菇，味道鲜美</li>
+                        <li>农家小炒肉：经典家常菜，肉质鲜嫩</li>
+                        <li>土鸡炖蘑菇：营养丰富，味道鲜美</li>
+                    </ul>
+                </div>
+                
+                <!-- 安吉竹海餐厅 -->
+                <div class="restaurant-item">
+                    <h4><i class="fas fa-store"></i> 竹海第一庄</h4>
+                    <p><i class="fas fa-map-marker-alt"></i> 地址：五鹤村查家头1号</p>
+                    <p><i class="fas fa-info-circle"></i> 特色：以竹笋和当地山野菜为主打的农家菜</p>
+                    <p><i class="fas fa-money-bill-wave"></i> 人均消费：80-120元</p>
+                    <p><i class="fas fa-certificate"></i> 推荐菜品：</p>
+                    <ul class="dish-list">
+                        <li>竹筒饭：用新鲜竹筒蒸煮的米饭，有竹香</li>
+                        <li>竹笋炒肉：新鲜竹笋配上五花肉，鲜香可口</li>
+                        <li>竹荪汤：清热滋补的营养汤品</li>
+                        <li>山野时蔬：当季采摘的新鲜蔬菜</li>
+                    </ul>
+                </div>
+                
+                <!-- 南浔古镇餐厅 -->
+                <div class="restaurant-item">
+                    <h4><i class="fas fa-store"></i> 南浔人家</h4>
+                    <p><i class="fas fa-map-marker-alt"></i> 地址：南浔古镇内</p>
+                    <p><i class="fas fa-info-circle"></i> 特色：正宗的江南水乡美食，口味清淡鲜美</p>
+                    <p><i class="fas fa-money-bill-wave"></i> 人均消费：80-130元</p>
+                    <p><i class="fas fa-certificate"></i> 推荐菜品：</p>
+                    <ul class="dish-list">
+                        <li>南浔臭豆腐：外酥里嫩，味道独特</li>
+                        <li>太湖银鱼：鲜嫩细滑，是太湖特产</li>
+                        <li>三白酒酿蛋：甜糯可口的传统小吃</li>
+                        <li>南浔红烧肉：肥而不腻，入口即化</li>
+                        <li>水乡糕点：当地传统小吃，口味多样</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+        <div class="section">
+            <h2 class="section-title"><i class="fas fa-info-circle"></i> 实用信息</h2>
+            <div class="practical-info">
+                <div class="info-card">
+                    <h4><i class="fas fa-phone-alt"></i> 紧急联系方式</h4>
+                    <p>报警电话：110</p>
+                    <p>急救电话：120</p>
+                    <p>消防电话：119</p>
+                    <p>湖州市旅游咨询：0572-12301</p>
+                    <p>莫干山游客服务中心：0572-8033999</p>
+                    <p>中国大竹海景区：0572-5334555</p>
+                    <p>南浔古镇游客中心：0572-3011707</p>
+                </div>
+                <div class="info-card">
+                    <h4><i class="fas fa-exclamation-triangle"></i> 注意事项</h4>
+                    <ul>
+                        <li>五一假期为旅游旺季，景点可能人流较大，建议早出发</li>
+                        <li>带好老人、儿童的必要药品</li>
+                        <li>注意防晒和防蚊虫叮咬，特别是在山区和竹海</li>
+                        <li>山区道路有坡度，带老人和儿童游玩时注意安全</li>
+                        <li>保管好贵重物品，特别是在人流密集的景点</li>
+                        <li>尊重当地风俗习惯，保护环境和文物古迹</li>
+                    </ul>
+                </div>
+                <div class="info-card">
+                    <h4><i class="fas fa-shopping-bag"></i> 特产推荐</h4>
+                    <ul>
+                        <li><strong>莫干山：</strong>莫干山笋干、山茶油、民宿手工艺品</li>
+                        <li><strong>安吉：</strong>安吉白茶、竹炭制品、竹编工艺品、竹筒酒</li>
+                        <li><strong>南浔：</strong>南浔丝绸、南浔糕点、水乡特色手工艺品</li>
+                    </ul>
+                </div>
+                <div class="info-card">
+                    <h4><i class="fas fa-suitcase"></i> 行李清单</h4>
+                    <ul>
+                        <li>舒适的步行鞋（山区和古镇都需要较多步行）</li>
+                        <li>轻便衣物（五一气温11-27°C，建议带薄外套）</li>
+                        <li>防晒用品（帽子、防晒霜、太阳镜）</li>
+                        <li>雨具（以防下雨）</li>
+                        <li>常用药品（感冒药、肠胃药、创可贴等）</li>
+                        <li>充电宝、相机（记录美好瞬间）</li>
+                        <li>少量现金（部分景区小商贩可能不支持电子支付）</li>
+                    </ul>
+                </div>
+                <div class="info-card">
+                    <h4><i class="fas fa-money-bill-wave"></i> 预算摘要</h4>
+                    <p><strong>住宿费用：</strong> 约3000-4000元（2晚，含莫干山1晚、安吉1晚）</p>
+                    <p><strong>餐饮费用：</strong> 约2000-3000元（3-5人，4天）</p>
+                    <p><strong>门票费用：</strong> 约1500-2000元（含莫干山、竹海、南浔古镇）</p>
+                    <p><strong>交通费用：</strong> 自驾油费约400-600元</p>
+                    <p><strong>其他费用：</strong> 约1000元（特产、体验活动等）</p>
+                    <p><strong>总预算：</strong> 约8000-10000元（3-5人团队）</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>祝您五一假期旅途愉快！| 行程规划制作于2025年</p>
+    </footer>
+</body>
+</html>
